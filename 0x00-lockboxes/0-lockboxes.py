@@ -6,7 +6,8 @@
 def canUnlockAll(boxes):
     """ Check if all boxes can be opened"""
 
-    if len(boxes) == 0 or not isinstance(boxes, list):
+#    if len(boxes) == 0 or not isinstance(boxes, list):
+    if len(boxes) == 0 or type(boxes) is not list:
         return False
 
     keys = set(range(len(boxes)))
