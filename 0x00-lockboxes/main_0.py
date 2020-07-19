@@ -25,3 +25,14 @@ print(canUnlockAll(boxes))
 
 boxes = [[1, 2], []]
 print(canUnlockAll(boxes))
+
+boxes = [[None], []]
+print(canUnlockAll(boxes))
+
+boxes = [['a'], []]
+print(canUnlockAll(boxes))
+
+boxes = [[1], ['a']]
+print(canUnlockAll(boxes))
+#boxes = None
+#print(canUnlockAll(boxes))

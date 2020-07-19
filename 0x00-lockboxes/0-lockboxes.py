@@ -20,7 +20,7 @@ def canUnlockAll(boxes):
         temp_keys = {0}
 
         for real_index, index in enumerate(available_keys):
-            if not index > len(keys) - 1:
+            if isinstance(index, int) and not index > len(keys) - 1:
                 used_keys.add(index)
 
                 for key in boxes[index]:
