@@ -15,7 +15,7 @@ def canUnlockAll(boxes):
     used_keys = set([0])
 
     while True:
-        temp_keys = {0}
+        temp_keys = set()
 
         for real_index, index in enumerate(available_keys):
             if isinstance(index, int) and not index > len(keys) - 1:
@@ -28,7 +28,7 @@ def canUnlockAll(boxes):
         if used_keys == keys:
             return True
 
-        if real_index + 1 == len(available_keys) and len(temp_keys) == 1:
+        if real_index + 1 == len(available_keys) and len(temp_keys) == 0:
             return False
 
         available_keys = temp_keys
