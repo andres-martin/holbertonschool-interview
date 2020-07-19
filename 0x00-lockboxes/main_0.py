@@ -36,3 +36,6 @@ boxes = [[1], ['a']]
 print(canUnlockAll(boxes))
 #boxes = None
 #print(canUnlockAll(boxes))
+boxes = [{}]
+print(canUnlockAll(boxes), "\t: False")
+print('-----------------------------')

@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# import pdb; pdb.set_trace()
 """Algorithm practice"""
 
 
@@ -8,8 +9,8 @@ def canUnlockAll(boxes):
     if boxes is None or not isinstance(boxes, list):
         return False
 
-    if not boxes:
-        return True
+    if len(boxes) is 0:
+        return False
 
     keys = set(range(len(boxes)))
     starting_keys = set(boxes[0] or [0])
