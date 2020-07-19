@@ -8,8 +8,7 @@ def canUnlockAll(boxes):
     if boxes is None or not isinstance(boxes, list):
         return False
 
-    if not boxes:
-        return True
+    if not boxes: boxes.append([0])
 
     keys = set(range(len(boxes)))
     starting_keys = set(boxes[0] or [0])
@@ -20,12 +19,11 @@ def canUnlockAll(boxes):
         temp_keys = {0}
 
         for real_index, index in enumerate(available_keys):
-            if not index > len(keys) - 1:
-                used_keys.add(index)
+            used_keys.add(index)
 
-                for key in boxes[index]:
-                    if key not in used_keys:
-                        temp_keys.add(key)
+            for key in boxes[index]:
+                if key not in used_keys:
+                    temp_keys.add(key)
 
         if used_keys == keys:
             return True
