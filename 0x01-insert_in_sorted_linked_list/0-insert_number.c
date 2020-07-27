@@ -3,9 +3,10 @@
 #include "lists.h"
 
 /**
- * print_listint - prints all elements of a listint_t list
- * @h: pointer to head of list
- * Return: number of nodes
+ * insert_node - inserts a node of type listint_t into a singled linked list
+ * @head: pointer to head of list
+ * @number: number to be inserted in new node
+ * Return: address of new node
  */
 
 listint_t *insert_node(listint_t **head, int number)
@@ -20,7 +21,7 @@ listint_t *insert_node(listint_t **head, int number)
 	if (!new_node)
 		return (NULL);
 
-	if(!current_node || number < current_node->n)
+	if (!current_node || number < current_node->n)
 	{
 		new_node->next = current_node;
 		*head = new_node;
@@ -31,12 +32,8 @@ listint_t *insert_node(listint_t **head, int number)
 	new_node->n = number;
 
 	while (current_node->next && number > current_node->next->n)
-	{
-		printf("Moviendo el puntero %i\n", current_node->n);
 		current_node = current_node->next;
-	}
 
-	printf("Aqui quedo el puntero %i\n", current_node->n);
 	new_node->next = current_node->next;
 	current_node->next = new_node;
 
