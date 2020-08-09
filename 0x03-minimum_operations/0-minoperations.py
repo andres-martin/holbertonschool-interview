@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-''' comments '''
+''' this algo uses best OOP practices, be clean coder!'''
 
 
 def minOperations(n):
-
+    ''' calculates the fewest number of operations needed to result in exactly n '''
     if n <= 1 or not isinstance(n, int):
         return 0
 
