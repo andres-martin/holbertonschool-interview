@@ -1,5 +1,26 @@
 #!/usr/bin/python3
 
+def minOperations(n):
+
+    if n <= 1 or not isinstance(n, int):
+        return 0
+
+    number_of_operations = 1
+
+    clip = ClipBoardOperations(1)
+    clip.copy_all()
+
+    while n is not clip.clipboard:
+        clip.paste()
+        number_of_operations += 1
+
+        if n == clip.clipboard:
+            return number_of_operations
+
+        if n % clip.clipboard == 0:
+            clip.copy_all()
+            number_of_operations += 1
+
 
 class ClipBoardOperations:
     ''' clipboard operations '''
@@ -22,25 +43,3 @@ class ClipBoardOperations:
 
     def paste(self):
         self.__clipboard += self.__copy_operation
-
-
-def minOperations(n):
-
-    if n <= 1 or not isinstance(n, int):
-        return 0
-
-    number_of_operations = 1
-
-    clip = ClipBoardOperations(1)
-    clip.copy_all()
-
-    while n is not clip.clipboard:
-        clip.paste()
-        number_of_operations += 1
-
-        if n == clip.clipboard:
-            return number_of_operations
-
-        if n % clip.clipboard == 0:
-            clip.copy_all()
-            number_of_operations += 1
