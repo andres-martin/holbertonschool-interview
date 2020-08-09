@@ -9,21 +9,17 @@ def minOperations(n):
     if n <= 1 or not isinstance(n, int):
         return 0
 
-    number_of_operations = 1
-
     clip = ClipBoardOperations(1)
     clip.copy_all()
 
     while n is not clip.clipboard:
         clip.paste()
-        number_of_operations += 1
 
         if n == clip.clipboard:
-            return number_of_operations
+            return clip.number_of_operations
 
         if n % clip.clipboard == 0:
             clip.copy_all()
-            number_of_operations -= -1
 
 
 class ClipBoardOperations:
@@ -32,10 +28,15 @@ class ClipBoardOperations:
     def __init__(self, data):
         self.__clipboard = data
         self.__copy_operation = 0
+        self.__number_of_operations = 0
 
     @property
     def clipboard(self):
         return self.__clipboard
+
+    @property
+    def number_of_operations(self):
+        return self.__number_of_operations
 
     @clipboard.setter
     def clipboard(self, value):
@@ -43,7 +44,8 @@ class ClipBoardOperations:
 
     def copy_all(self):
         self.__copy_operation = self.__clipboard
-        return self.__copy_operation
+        self.__number_of_operations -= -1
 
     def paste(self):
         self.__clipboard += self.__copy_operation
+        self.__number_of_operations -= -1
