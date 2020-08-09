@@ -3,7 +3,9 @@
 
 
 def minOperations(n):
-    ''' calculates the fewest number of operations needed to result in exactly n '''
+    ''' calculates the fewest number of
+        operations needed to result in exactly n '''
+
     if n <= 1 or not isinstance(n, int):
         return 0
 
