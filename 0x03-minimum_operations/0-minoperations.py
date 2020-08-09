@@ -23,7 +23,7 @@ def minOperations(n):
 
         if n % clip.clipboard == 0:
             clip.copy_all()
-            number_of_operations += 1
+            number_of_operations -= -1
 
 
 class ClipBoardOperations:
