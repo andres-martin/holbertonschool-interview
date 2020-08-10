@@ -15,7 +15,7 @@ def minOperations(n):
     while clip.output < n:
         clip.paste()
 
-        if n is not clip.output and n % clip.output == 0:
+        if clip.output < n and n % clip.output == 0:
             clip.copy_all()
 
     return clip.number_of_operations
