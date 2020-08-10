@@ -12,7 +12,7 @@ def minOperations(n):
     clip = ClipBoardOperations(1)
     clip.copy_all()
 
-    while clip.output is not n:
+    while n is not clip.output:
         clip.paste()
 
         if clip.output < n and n % clip.output == 0:
