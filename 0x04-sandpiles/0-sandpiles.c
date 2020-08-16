@@ -9,16 +9,13 @@
 
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
-	int masking_grid[3][3];
-
 	sum_grids(grid1, grid2);
 
 	while (stable_grid(grid1) != 0)
 	{
 		printf("=\n");
-		print_and_set_grid(grid1, masking_grid);
-		topple(grid1, masking_grid);
-		sum_grids(grid1, masking_grid);
+		_print_grid(grid1);
+		topple(grid1);
 	}
 
 }
@@ -53,10 +50,15 @@ int stable_grid(int grid[3][3])
  *
  */
 
-void topple(int grid[3][3], int masking_grid[3][3])
+void topple(int grid[3][3])
 {
 	int x, y;
 	int value = 0;
+	int masking_grid[3][3] = {
+		{0, 0, 0},
+		{0, 0, 0},
+		{0, 0, 0}
+	};
 
 	for (x = 0; x < 3; x++)
 	{
@@ -74,6 +76,8 @@ void topple(int grid[3][3], int masking_grid[3][3])
 			}
 		}
 	}
+
+	sum_grids(grid, masking_grid);
 }
 
 /**
@@ -84,7 +88,7 @@ void topple(int grid[3][3], int masking_grid[3][3])
 
 void sum_grids(int grid1[3][3], int grid2[3][3])
 {
-	int x, y = 0;
+	int x, y;
 
 	for (x = 0; x < 3; x++)
 	{
@@ -96,12 +100,12 @@ void sum_grids(int grid1[3][3], int grid2[3][3])
 }
 
 /**
- * print_and_set_grid - self descriptive
+ * _print_grid - self descriptive
  * @grid: 3x3 array
  * @masking_grid: self descriptive
  */
 
-void print_and_set_grid(int grid[3][3], int masking_grid[3][3])
+void _print_grid(int grid[3][3])
 {
 	int i, j;
 
@@ -109,7 +113,6 @@ void print_and_set_grid(int grid[3][3], int masking_grid[3][3])
 	{
 		for (j = 0; j < 3; j++)
 		{
-			masking_grid[i][j] = 0;
 			if (j)
 				printf(" ");
 			printf("%d", grid[i][j]);
