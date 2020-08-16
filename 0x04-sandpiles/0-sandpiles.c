@@ -46,8 +46,6 @@ int stable_grid(int grid[3][3])
 /**
  * topple - topples grid
  * @grid: grid 3x3
- * @masking_grid: mask to add to main grid
- *
  */
 
 void topple(int grid[3][3])
@@ -102,7 +100,6 @@ void sum_grids(int grid1[3][3], int grid2[3][3])
 /**
  * _print_grid - self descriptive
  * @grid: 3x3 array
- * @masking_grid: self descriptive
  */
 
 void _print_grid(int grid[3][3])
