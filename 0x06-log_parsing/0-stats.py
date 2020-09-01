@@ -15,7 +15,7 @@ number_of_lines = 0
 
 def print_status_code(total_size):
     print("File size: {:d}".format(total_size))
-    for key, value in STATUS_CODES.items():
+    for key, value in sorted(STATUS_CODES.items()):
         if value != 0:
             print("{}: {:d}".format(key, value))
 
@@ -33,8 +33,8 @@ try:
         number_of_lines += 1
 
         if number_of_lines == 10:
-            number_of_lines = 0
             print_status_code(total_size)
+            number_of_lines = 0
 
 except Exception:
     pass
