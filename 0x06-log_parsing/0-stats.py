@@ -23,14 +23,15 @@ def print_status_code(total_size):
 try:
     for argument in sys.stdin:
         arguments = argument.split(" ")
-        status_code = arguments[-2]
-        file_size = arguments[-1]
+        if len(arguments) > 2:
+            status_code = arguments[-2]
+            file_size = arguments[-1]
 
-        if status_code in STATUS_CODES:
-            STATUS_CODES[status_code] += 1
+            if status_code in STATUS_CODES:
+                STATUS_CODES[status_code] += 1
 
-        total_size += int(file_size)
-        number_of_lines += 1
+            total_size += int(file_size)
+            number_of_lines += 1
 
         if number_of_lines == 10:
             number_of_lines = 0
