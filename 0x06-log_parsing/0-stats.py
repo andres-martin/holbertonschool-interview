@@ -37,7 +37,7 @@ try:
                 print_status_code(total_size)
                 number_of_lines = 0
 
-except Exception:
+except KeyboardInterrupt:
     pass
 finally:
     print_status_code(total_size)
