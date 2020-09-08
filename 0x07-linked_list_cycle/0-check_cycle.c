@@ -13,10 +13,10 @@ int check_cycle(listint_t *list)
 	if (!list)
 		return (0);
 
-	fast_node = list->next;
+	fast_node = list;
 	slow_node = list;
 
-	while (slow_node && fast_node->next)
+	while (slow_node && fast_node && fast_node->next)
 	{
 		slow_node = slow_node->next;
 		fast_node = fast_node->next->next;
