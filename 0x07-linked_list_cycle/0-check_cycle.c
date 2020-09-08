@@ -8,8 +8,7 @@
 
 int check_cycle(listint_t *list)
 {
-	listint_t *slow_node;
-	listint_t *fast_node;
+	listint_t *slow_node, *fast_node;
 
 	if (!list)
 		return (0);
@@ -22,7 +21,7 @@ int check_cycle(listint_t *list)
 		slow_node = slow_node->next;
 		fast_node = fast_node->next->next;
 
-		if (fast_node->n == slow_node->n)
+		if (fast_node == slow_node)
 			return (1);
 	}
 
