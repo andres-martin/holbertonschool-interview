@@ -1,31 +1,30 @@
 #include "lists.h"
 
 /**
- * add_nodeint - adds a new node at the beginning of a listint_t list
- * @head: pointer to a pointer of the start of the list
- * @n: integer to be included in node
- * Return: address of the new element or NULL if it fails
+ * check_cycle - checks if a singly linked list has a cycle in it.
+ * @list: pointer to the start of the list
+ * Return: 0 if there is no cycle, 1 if there is a cycle
  */
 
 int check_cycle(listint_t *list)
 {
-        listint_t *slow_node;
-        listint_t *fast_node;
+	listint_t *slow_node;
+	listint_t *fast_node;
 
-        if (!list)
-                return (0);
+	if (!list)
+		return (0);
 
-        fast_node = list->next;
-        slow_node = list;
+	fast_node = list->next;
+	slow_node = list;
 
-        while(slow_node->next && fast_node->next)
-        {
-                slow_node = slow_node->next;
-                fast_node = fast_node->next->next;
+	while (slow_node->next && fast_node->next)
+	{
+		slow_node = slow_node->next;
+		fast_node = fast_node->next->next;
 
-                if (fast_node->n == slow_node->n)
-                        return (1);
-        }
+		if (fast_node->n == slow_node->n)
+			return (1);
+	}
 
-        return (0);
+	return (0);
 }
