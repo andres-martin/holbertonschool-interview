@@ -7,7 +7,7 @@ if len(sys.argv) is not 2:
     exit(1)
 
 try:
-    n_q: int = int(sys.argv[1])
+    n_q = int(sys.argv[1])
 except ValueError:
     print("N must be a number")
     exit(1)
