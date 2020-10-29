@@ -2,7 +2,7 @@
 ''' N queens algorithm '''
 import sys
 
-if len(sys.argv) is not 2:
+if len(sys.argv) != 2:
     print("Usage: nqueens N")
     exit(1)
 
