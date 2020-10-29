@@ -2,7 +2,7 @@
 ''' N queens algorithm '''
 import sys
 
-if len(sys.argv) != 2:
+if len(sys.argv) is not 2:
     print("Usage: nqueens N")
     exit(1)
 
@@ -12,7 +12,7 @@ except ValueError:
     print("N must be a number")
     exit(1)
 
-if int(sys.argv[1]) < 4:
+if n_q < 4:
     print("N must be at least 4")
     exit(1)
 
