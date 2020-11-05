@@ -24,7 +24,7 @@ avl_t *new_node(avl_t *parent, int n)
 }
 
 /**
- * array_to_tree - builds the array into a avl tree
+ * array_to_bts - builds the array into a avl tree
  *
  * @array: array of integers
  * @start: start point
@@ -33,7 +33,7 @@ avl_t *new_node(avl_t *parent, int n)
  * Return: root node
  */
 
-avl_t *array_to_tree(int array[], int start, int end, avl_t *parent)
+avl_t *array_to_bts(int array[], int start, int end, avl_t *parent)
 {
 	avl_t *root;
 	int middle;
@@ -47,9 +47,9 @@ avl_t *array_to_tree(int array[], int start, int end, avl_t *parent)
 	if (!root)
 		return (NULL);
 
-	root->left = array_to_tree(array, start, middle - 1, root);
+	root->left = array_to_bts(array, start, middle - 1, root);
 
-	root->right = array_to_tree(array, middle + 1, end, root);
+	root->right = array_to_bts(array, middle + 1, end, root);
 
 	return (root);
 }
@@ -67,5 +67,5 @@ avl_t *sorted_array_to_avl(int *array, size_t size)
 	if (!array)
 		return (NULL);
 
-	return (array_to_tree(array, 0, size - 1, NULL));
+	return (array_to_bts(array, 0, size - 1, NULL));
 }
