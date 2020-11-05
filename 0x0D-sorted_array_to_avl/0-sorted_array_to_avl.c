@@ -33,7 +33,7 @@ avl_t *new_node(avl_t *parent, int n)
  * Return: root node
  */
 
-avl_t *array_to_bts(int array[], int start, int end, avl_t *parent)
+avl_t *array_to_bts(int *array, int start, int end, avl_t *parent)
 {
 	avl_t *root;
 	int middle;
