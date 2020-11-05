@@ -1,64 +1,71 @@
 #include "binary_trees.h"
 
 /**
- * new_node - Creates a new node
- * @parent: new_node's parent
- * @data: new_node's data
- * Return: new node
+ * newNode - Creates new node
+ *
+ * @parent: The node´s father
+ * @n: the data of the node
+ * Return: New Node
  */
 
-avl_t *new_node(avl_t *parent, int data)
+avl_t *newNode(avl_t *parent, int n)
 {
-	avl_t *new_node;
+	avl_t *node;
 
-	new_node = malloc(sizeof(avl_t));
-	if (!new_node)
+	node = malloc(sizeof(avl_t));
+	if (!node)
 		return (NULL);
-	new_node->n = data;
-	new_node->parent = parent;
-	new_node->left = NULL;
-	new_node->right = NULL;
+	node->n = n;
+	node->parent = parent;
+	node->left = NULL;
+	node->right = NULL;
 
-	return (new_node);
+	return (node);
 }
 
 /**
- * array_to_bts - builds a BTS from a sorted array
- * @array: source sorted array
- * @start: starting point
- * @end: end of the array
- * @parent_node: parent node
- * Return: avl_t root node
+ * arrayToTree - Add the array elemento to tree
+ *
+ * @array: array of numbers
+ * @start: start the range
+ * @end: end the range
+ * @parent: parent's node
+ * Return: root Node
  */
 
-avl_t *array_to_bts(int *array, int start, int end, avl_t *parent_node)
+avl_t *arrayToTree(int array[], int start, int end, avl_t *parent)
 {
 	avl_t *root;
+	int mid;
 
 	if (start > end)
 		return (NULL);
 
-	int middle = (start + end) / 2;
+	mid = (start + end) / 2;
+	root = newNode(parent, array[mid]);
 
-	root = new_node(parent_node, array[middle]);
+	if (!root)
+		return (NULL);
 
-	root->left = array_to_bts(array, start, middle - 1, root);
-	root->right = array_to_bts(array, middle + 1, end, root);
+	root->left = arrayToTree(array, start, mid - 1, root);
+
+	root->right = arrayToTree(array, mid + 1, end, root);
 
 	return (root);
 }
 
-
 /**
- * sorted_array_to_avl - builds a BTS from a sorted array
- * @array: source sorted array
- * @size: size of the source array
- * Return: avl_t root node
+ * sorted_array_to_avl - builds an AVL tree from an array
+ *
+ * @array: array of numbers
+ * @size: size of the array
+ * Return: root Node
  */
 
 avl_t *sorted_array_to_avl(int *array, size_t size)
 {
 	if (!array)
 		return (NULL);
-	return (array_to_bts(array, 0, size - 1, NULL));
+
+	return (arrayToTree(array, 0, size - 1, NULL));
 }
