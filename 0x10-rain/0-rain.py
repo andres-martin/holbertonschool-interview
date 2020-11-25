@@ -4,9 +4,9 @@ from typing import List
 
 
 def rain(walls: List[int]) -> int:
-    ''' Return: Integer indicating
+    """ Return: Integer indicating
         total amount of rainwater retained.
-    '''
+    """
     if not walls or len(walls) == 0:
         return 0
 
