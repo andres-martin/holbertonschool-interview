@@ -1,12 +1,9 @@
 #!/usr/bin/python3
 '''rain algo'''
-from typing import List
 
 
-def rain(walls: List[int]) -> int:
-    """ Return: Integer indicating
-        total amount of rainwater retained.
-    """
+def rain(walls=[]):
+    """ self descriptive """
     if not walls or len(walls) == 0:
         return 0
 
