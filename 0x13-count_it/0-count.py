@@ -1,58 +1,53 @@
 #!/usr/bin/python3
-""" Count it algorithm """
-from requests import get
-
-REDDIT = "https://www.reddit.com/"
-HEADERS = {'user-agent': 'my-app/0.0.1'}
+"""recursive count it
+"""
+import requests as r
 
 
-def count_words(reddit, hot_list, after_word="", dic={}):
-    """ self descriptive function """
-    if not dic:
-        for word in hot_list:
-            dic[word] = 0
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) \
+            AppleWebKit/537.36 (KHTML, like Gecko)\
+                 Chrome/87.0.4280.88 Safari/537.36'}
 
-    if not after_word:
-        hot_list = [[key, value] for key, value in dic.items()]
-        hot_list = sorted(hot_list, key=lambda x: (-x[1], x[0]))
 
-        for word in hot_list:
-            if word[1]:
-                print(f"{word[0].lower()},: {word[1]}")
-        return None
-
-    url = REDDIT + f"r/{reddit}/hot/.json"
-
-    params = {
-        'limit': 100,
-        'after': after_word
-    }
-
-    res = get(url, headers=HEADERS, params=params, allow_redirects=False)
-
-    if res.status_code != 200:
-        return None
+def recursive_call(reddit, top_list=[], after="null"):
+    """return number of subscribers"""
+    URL = "https://www.reddit.com/r/{}.json?sort=hot&after={}&limit=100"\
+          .format(reddit, after)
 
     try:
-        js = res.json()
-
-    except ValueError:
-        return None
-
-    try:
-
-        data = js.get("data")
-        after_word = data.get("after_word")
-        children = data.get("children")
-        for child in children:
-            post = child.get("data")
-            title = post.get("title")
-            lower = [sm.lower() for sm in title.split(' ')]
-
-            for word in hot_list:
-                dic[word] += lower.count(word.lower())
-
+        subscribers = r.get(URL, headers=HEADERS,
+                            allow_redirects=False).json()
+        data = subscribers.get("data")
+        after = subscribers.get("data").get("after")
+        top_list += [story.get("data")['title'] for story in data['children']]
+        if after:
+            recursive_call(reddit, top_list, after)
+        return top_list
     except Exception:
-        return None
+        pass
 
-    count_words(reddit, hot_list, after_word, dic)
+
+def count_words(reddit, word_list, array=None, dic={}):
+    """ count words - method
+    """
+
+    if dic == {}:
+        for word in word_list:
+            dic.update({word: 0})
+    if array is None:
+        array = recursive_call(reddit)
+    if array and len(array) > 0:
+        if word_list != []:
+            word_list = list(set(word_list))
+            for item in array:
+                item = item.lower()
+                if word_list[-1].lower() in item.split():
+                    if word_list[-1] in dic.keys():
+                        dic[word_list[-1]] += 1
+            word_list.pop(-1)
+            count_words(reddit, word_list, array, dic)
+        else:
+            for key in sorted(dic.items(), key=lambda kv: (-kv[1], kv[0])):
+                if key[1] != 0:
+                    print("{}: {}".format(key[0], key[1]))
